@@ -56,7 +56,6 @@ public extension RawRepresentable where Self: CustomDebugStringConvertible {
     }
 }
 
-```swift
 enum Status: String, CustomDebugStringConvertible {
     case success
     case failure
