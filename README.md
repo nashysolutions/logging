@@ -1,6 +1,6 @@
-# DebugDictionaryBuilder
+# Logging
 
-A small Swift utility for generating readable, pretty-printed JSON debug descriptions from `[String: Any]` dictionaries — even when they contain non-JSON-safe values like `Date`, `URL`, or custom types.
+Pretty-printed JSON debug output from `[String: Any]`, with automatic sanitisation of `Date`, `URL`, and other non-serialisable values.
 
 ## Features
 
