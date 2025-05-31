@@ -17,7 +17,7 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "git@github.com:pointfreeco/swift-dependencies.git", .upToNextMinor(from: "1.8.1")),
-        .package(url: "git@github.com:nashysolutions/foundation-dependencies.git", .upToNextMinor(from: "1.0.0")),
+        .package(url: "git@github.com:nashysolutions/foundation-dependencies.git", .upToNextMinor(from: "3.0.0")),
     ],
     targets: [
         .target(
