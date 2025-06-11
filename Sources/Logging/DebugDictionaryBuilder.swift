@@ -36,10 +36,14 @@ public enum DebugDictionaryBuilder {
             return bool
         case let null as NSNull:
             return null
+        case let date as Date:
+            return dateFormatter.string(from: date)
         case let dict as [String: Any]:
             return sanitise(dict)
         case let array as [Any]:
             return array.map { sanitiseValue($0) }
+        case let optional as Optional<Any>:
+            return optional.map(sanitiseValue) ?? "null"
         default:
             return String(describing: value)
         }
@@ -47,9 +51,10 @@ public enum DebugDictionaryBuilder {
     
     private static let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss Z"
-        formatter.timeZone = TimeZone(secondsFromGMT: 0)
-        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .medium
+        formatter.locale = Locale.current
+        formatter.timeZone = TimeZone.current
         return formatter
     }()
 }
