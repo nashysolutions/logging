@@ -5,10 +5,10 @@ import PackageDescription
 let package = Package(
     name: "logging",
     platforms: [
-        .iOS(.v14),
-        .tvOS(.v14),
-        .macOS(.v11),
-        .watchOS(.v7),
+        .iOS(.v16),
+        .tvOS(.v16),
+        .macOS(.v13),
+        .watchOS(.v9),
     ],
     products: [
         .library(
@@ -17,7 +17,7 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "git@github.com:pointfreeco/swift-dependencies.git", .upToNextMinor(from: "1.8.1")),
-        .package(url: "git@github.com:nashysolutions/foundation-dependencies.git", .upToNextMinor(from: "3.0.0")),
+        .package(url: "git@github.com:nashysolutions/foundation-dependencies.git", .upToNextMinor(from: "3.1.0"))
     ],
     targets: [
         .target(
