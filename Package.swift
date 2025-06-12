@@ -13,23 +13,36 @@ let package = Package(
     products: [
         .library(
             name: "Logging",
-            targets: ["Logging"]),
+            targets: ["Logging"]
+        ),
+        .library(
+            name: "ParsedJSONKit",
+            targets: ["ParsedJSONKit"]
+        ),
     ],
     dependencies: [
-        .package(url: "git@github.com:pointfreeco/swift-dependencies.git", .upToNextMinor(from: "1.8.1")),
-        .package(url: "git@github.com:nashysolutions/foundation-dependencies.git", .upToNextMinor(from: "3.1.0"))
+        .package(url: "https://github.com/pointfreeco/swift-dependencies.git", .upToNextMinor(from: "1.8.1")),
+        .package(url: "https://github.com/nashysolutions/foundation-dependencies.git", .upToNextMinor(from: "3.1.0"))
     ],
     targets: [
         .target(
             name: "Logging",
             dependencies: [
                 .product(name: "Dependencies", package: "swift-dependencies"),
-                .product(name: "FoundationDependencies", package: "foundation-dependencies")
+                .product(name: "FoundationDependencies", package: "foundation-dependencies"),
             ]
+        ),
+        .target(
+            name: "ParsedJSONKit",
+            dependencies: ["Logging"]
         ),
         .testTarget(
             name: "LoggingTests",
-            dependencies: ["Logging"]
+            dependencies: ["Logging","ParsedJSONKit"]
+        ),
+        .testTarget(
+            name: "ParsedJSONKitTests",
+            dependencies: ["ParsedJSONKit"]
         )
     ]
 )

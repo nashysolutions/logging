@@ -1,0 +1,44 @@
+{
+  "configurations" : [
+    {
+      "id" : "E85E0AA5-DF9F-44D0-B72B-F8333DB1FEF1",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : {
+      "targets" : [
+        {
+          "containerPath" : "container:",
+          "identifier" : "Logging",
+          "name" : "Logging"
+        },
+        {
+          "containerPath" : "container:",
+          "identifier" : "ParsedJSONKit",
+          "name" : "ParsedJSONKit"
+        }
+      ]
+    }
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "LoggingTests",
+        "name" : "LoggingTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "ParsedJSONKitTests",
+        "name" : "ParsedJSONKitTests"
+      }
+    }
+  ],
+  "version" : 1
+}

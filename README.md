@@ -1,16 +1,45 @@
 # Logging
 
-Pretty-printed JSON debug output from `[String: Any]`, with automatic sanitisation of `Date`, `URL`, and other non-serialisable values.
+Tools for producing readable, structured, and safe debug output in Swift.
+
+This package includes:
+
+- `DebugDictionaryBuilder`: pretty-prints `[String: Any]` as JSON for debugging
+- `ParsedJSONKit`: inspects JSON output and assists with test assertions
+
+---
 
 ## Features
 
-- ✅ Pretty-printed JSON output
-- ✅ Sanitises unsupported types (e.g. `Date`, `URL`) using `String(describing:)`
+- ✅ Pretty-printed JSON debug output
+- ✅ Sanitises unsupported types (`Date`, `URL`, etc.)
 - ✅ Handles nested dictionaries and arrays
-- ✅ Uses stable date formatting (`yyyy-MM-dd HH:mm:ss Z`, UTC)
-- ✅ Automatically removes escaped slashes (`\/`) for cleaner output
+- ✅ Stable and locale-independent date formatting (`yyyy-MM-dd HH:mm:ss Z`)
+- ✅ Automatically removes escaped slashes (`\/`)
+- ✅ Optional redaction of sensitive fields
+- ✅ JSON inspection for test validation (via `ParsedJSONKit`)
+
+---
+
+## SPM Integration
+
+```swift
+.package(url: "https://github.com/your-org/logging", from: "1.0.0")
+```
+
+```swift
+.target(
+  name: "YourTarget",
+  dependencies: [
+    .product(name: "Logging", package: "logging"),
+    .product(name: "ParsedJSONKit", package: "logging")
+  ]
+)
+```
 
 ## Usage
+
+### Debug Output
 
 ```swift
 let data: [String: Any] = [
@@ -23,9 +52,14 @@ let data: [String: Any] = [
     ]
 ]
 
-let debugString = DebugDictionaryBuilder.makeDescription(from: data)
+let builder = DebugDictionaryBuilder()
+let debugString = builder.makeDescription(from: data)
 print(debugString)
+```
 
+Prints:
+
+```json
 {
   "name" : "Alice",
   "joined" : "1970-01-01 00:00:00 +0000",
@@ -37,34 +71,43 @@ print(debugString)
 }
 ```
 
-## Recommended Usage
+---
 
-Automatically generate debug descriptions for `RawRepresentable` types (such as enums) by using the included extension:
+### Redacting Sensitive Values
+
+You can redact specific fields based on key name matches:
 
 ```swift
-public extension RawRepresentable where Self: CustomDebugStringConvertible {
-    
-    var debugDescription: String {
-        DebugDictionaryBuilder.makeDescription(from: debugDictionary)
-    }
-    
-    var debugDictionary: [String: Any] {
-        return [
-            "rawValue": rawValue,
-            "description": String(describing: self)
-        ]
-    }
-}
+let builder = DebugDictionaryBuilder(redactKeys: ["password", "token"])
+let output = builder.makeDescription(from: [
+    "username": "Alice",
+    "token": "abc123"
+])
+```
 
-enum Status: String, CustomDebugStringConvertible {
-    case success
-    case failure
-}
+Prints:
 
-print(Status.success.debugDescription)
-
+```json
 {
-  "rawValue" : "success",
-  "description" : "success"
+  "username" : "Alice",
+  "token" : {
+    "value" : "[REDACTED]",
+    "isNilOrEmpty" : false
+  }
 }
+```
+
+---
+
+## Testing & Inspection
+
+Use `ParsedJSONKit` to inspect JSON structure in tests:
+
+```swift
+let builder = DebugDictionaryBuilder()
+let json = builder.makeDescription(from: ["key": "value"])
+let parsed = try JSONInspector(json)
+
+#expect(parsed.topLevelKeyCount == 1)
+#expect(try parsed.require("key", as: String.self) == "value")
 ```

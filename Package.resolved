@@ -1,5 +1,5 @@
 {
-  "originHash" : "246037f39494745f1f01ccf2408df1966bbc44b611ff799952f048a8569d1e32",
+  "originHash" : "52ae8f99fd4298417e53296f55219232509283bcc9d24c176a9116eea4058fd9",
   "pins" : [
     {
       "identity" : "combine-schedulers",
@@ -11,12 +11,30 @@
       }
     },
     {
+      "identity" : "error-presentation",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/nashysolutions/error-presentation.git",
+      "state" : {
+        "revision" : "fff6000d6642eebda879e3d57965541dd6a4aa47",
+        "version" : "1.0.0"
+      }
+    },
+    {
+      "identity" : "files",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/nashysolutions/files.git",
+      "state" : {
+        "revision" : "1c040ba474a9726f2875380c155173e488a829cd",
+        "version" : "2.0.0"
+      }
+    },
+    {
       "identity" : "foundation-dependencies",
       "kind" : "remoteSourceControl",
-      "location" : "git@github.com:nashysolutions/foundation-dependencies.git",
+      "location" : "https://github.com/nashysolutions/foundation-dependencies.git",
       "state" : {
-        "revision" : "51b48a597293583873f897657b9e3bb3cf5bd33e",
-        "version" : "3.0.0"
+        "revision" : "e4336b28814c5fef8b7622e4ae1e3c2df09f7ea5",
+        "version" : "3.1.0"
       }
     },
     {
@@ -40,7 +58,7 @@
     {
       "identity" : "swift-dependencies",
       "kind" : "remoteSourceControl",
-      "location" : "git@github.com:pointfreeco/swift-dependencies.git",
+      "location" : "https://github.com/pointfreeco/swift-dependencies.git",
       "state" : {
         "revision" : "ec2862d1364536fc22ec56a3094e7a034bbc7da8",
         "version" : "1.8.1"
