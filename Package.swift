@@ -22,7 +22,7 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/pointfreeco/swift-dependencies.git", .upToNextMinor(from: "1.8.1")),
-        .package(url: "https://github.com/nashysolutions/foundation-dependencies.git", .upToNextMinor(from: "3.1.0"))
+        .package(url: "https://github.com/nashysolutions/foundation-dependencies.git", .upToNextMinor(from: "4.0.0"))
     ],
     targets: [
         .target(
